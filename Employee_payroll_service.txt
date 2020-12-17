@@ -336,3 +336,65 @@ mysql> SELECT * from employee_payroll where name = 'Terisa';
 |  6 | Terisa | NULL        | TBD     | Marketing  | F      |   3000000 |    1000000 |     2000000 | 500000 | 1500000 | 2020-05-28 |
 +----+--------+-------------+---------+------------+--------+-----------+------------+-------------+--------+---------+------------+
 2 rows in set (0.00 sec)
+
+# UC_11 Implement_ER_Diagram_in_DB
+
+
+mysql> CREATE database payrollservice;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use payrollservice;
+Database changed
+mysql> CREATE TABLE company (
+    -> company_id int NOT NULL PRIMARY KEY,
+    -> company_name VARCHAR(250) NOT NULL);
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> CREATE TABLE employee_details(
+    -> emp_id INT unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    -> name VARCHAR(50) NOT NULL,
+    -> company_id int,
+    -> phone_number VARCHAR(250) NOT NULL,
+    -> address VARCHAR(250) NOT NULL,
+    -> gender CHAR(1),
+    -> start DATE NOT NULL,
+    -> FOREIGN KEY (company_id) REFERENCES company (company_id)
+    -> );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> create table department(
+    -> dept_id int NOT NULL PRIMARY KEY,
+    -> dep_name VARCHAR(150) NOT NULL
+    -> );
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> create table payroll(
+    -> emp_id int unsigned NOT NULL AUTO_INCREMENT,
+    -> basic_pay Double NOT NULL,
+    -> deductions Double NOT NULL,
+    -> taxable_pay Double NOT NULL,
+    -> tax Double NOT NULL,
+    -> net_pay Double NOT NULL,
+    -> FOREIGN KEY(emp_id) REFERENCES employee_details(emp_id)
+    -> );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> create table employee_department(
+    -> emp_id int unsigned NOT NULL AUTO_INCREMENT,
+    -> dept_id int NOT NULL,
+    -> FOREIGN KEY (emp_id) REFERENCES employee_details(emp_id),
+    -> FOREIGN KEY (dept_id) REFERENCES department(dept_id)
+    -> );
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> show tables;
++--------------------------+
+| Tables_in_payrollservice |
++--------------------------+
+| company                  |
+| department               |
+| employee_department      |
+| employee_details         |
+| payroll                  |
++--------------------------+
+5 rows in set (0.01 sec)
