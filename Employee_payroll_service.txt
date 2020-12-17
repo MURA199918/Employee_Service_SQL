@@ -181,3 +181,46 @@ mysql> select * from employee_payroll;
 |  5 | Sunita  | F      | 1000000 | 2020-05-23 |
 +----+---------+--------+---------+------------+
 5 rows in set (0.00 sec)
+
+# UC7 Find_Sum_Average_Min_Max 
+
+
+mysql> SELECT gender, SUM(salary) from employee_payroll where gender = 'F' GROUP BY gender;
++--------+-------------+
+| gender | SUM(salary) |
++--------+-------------+
+| F      |     9000000 |
++--------+-------------+
+1 row in set (0.01 sec)
+
+mysql> SELECT name, gender, MAX(salary) from employee_payroll where gender = 'F' GROUP BY gender;
++---------+--------+-------------+
+| name    | gender | MAX(salary) |
++---------+--------+-------------+
+| Melissa | F      |     8000000 |
++---------+--------+-------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT name, gender, AVG(salary) from employee_payroll where gender = 'M' GROUP BY gender;
++------+--------+-------------+
+| name | gender | AVG(salary) |
++------+--------+-------------+
+| Mark | M      |     3000000 |
++------+--------+-------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT name, gender, COUNT(salary) from employee_payroll where gender = 'F' GROUP BY gender;
++---------+--------+---------------+
+| name    | gender | COUNT(salary) |
++---------+--------+---------------+
+| Melissa | F      |             2 |
++---------+--------+---------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT name, gender, MIN(salary) from employee_payroll where gender = 'F' GROUP BY gender;
++---------+--------+-------------+
+| name    | gender | MIN(salary) |
++---------+--------+-------------+
+| Melissa | F      |     1000000 |
++---------+--------+-------------+
+1 row in set (0.00 sec)
