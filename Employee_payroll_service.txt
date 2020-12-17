@@ -224,3 +224,48 @@ mysql> SELECT name, gender, MIN(salary) from employee_payroll where gender = 'F'
 | Melissa | F      |     1000000 |
 +---------+--------+-------------+
 1 row in set (0.00 sec)
+
+# UC8_Extended_Employee_Payroll_to_add_phone_department_and_address
+
+mysql> ALTER TABLE employee_payroll ADD phonenumber VARCHAR(15) AFTER name;
+Query OK, 0 rows affected (0.09 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE employee_payroll ADD address VARCHAR(250) AFTER phonenumber;
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE employee_payroll ADD department VARCHAR(150) NOT NULL after address;
+Query OK, 0 rows affected (0.08 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE employee_payroll ALTER address SET default 'TBD';
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * from employee_payroll;
++----+---------+-------------+---------+------------+--------+---------+------------+
+| id | name    | phonenumber | address | department | gender | salary  | start      |
++----+---------+-------------+---------+------------+--------+---------+------------+
+|  1 | Mark    | NULL        | NULL    |            | M      | 1000000 | 2020-05-18 |
+|  2 | Jeff    | NULL        | NULL    |            | M      | 2000000 | 2020-05-25 |
+|  3 | Bill    | NULL        | NULL    |            | M      | 6000000 | 2020-05-29 |
+|  4 | Melissa | NULL        | NULL    |            | F      | 8000000 | 2020-05-09 |
+|  5 | Sunita  | NULL        | NULL    |            | F      | 1000000 | 2020-05-23 |
++----+---------+-------------+---------+------------+--------+---------+------------+
+5 rows in set (0.00 sec)
+
+mysql> describe employee_payroll;
++-------------+--------------+------+-----+---------+----------------+
+| Field       | Type         | Null | Key | Default | Extra          |
++-------------+--------------+------+-----+---------+----------------+
+| id          | int unsigned | NO   | PRI | NULL    | auto_increment |
+| name        | varchar(150) | NO   |     | NULL    |                |
+| phonenumber | varchar(15)  | YES  |     | NULL    |                |
+| address     | varchar(250) | YES  |     | TBD     |                |
+| department  | varchar(150) | NO   |     | NULL    |                |
+| gender      | char(1)      | YES  |     | NULL    |                |
+| salary      | double       | NO   |     | NULL    |                |
+| start       | date         | NO   |     | NULL    |                |
++-------------+--------------+------+-----+---------+----------------+
+8 rows in set (0.01 sec)
