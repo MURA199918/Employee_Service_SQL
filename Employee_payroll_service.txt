@@ -63,3 +63,17 @@ mysql> INSERT into employee_payroll
     -> ('Sunita', 1000000.00, '2020-05-23');
 Query OK, 5 rows affected (0.01 sec)
 Records: 5  Duplicates: 0  Warnings: 0
+
+# UC4 Retrieve_Data_from_Table
+
+mysql> select * from employee_payroll;
++----+---------+---------+------------+
+| id | name    | salary  | start      |
++----+---------+---------+------------+
+|  1 | Mark    | 1000000 | 2020-05-18 |
+|  2 | Jeff    | 2000000 | 2020-05-25 |
+|  3 | Bill    | 6000000 | 2020-05-29 |
+|  4 | Melissa | 8000000 | 2020-05-09 |
+|  5 | Sunita  | 1000000 | 2020-05-23 |
++----+---------+---------+------------+
+5 rows in set (0.01 sec)
