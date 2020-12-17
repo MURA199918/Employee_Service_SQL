@@ -269,3 +269,37 @@ mysql> describe employee_payroll;
 | start       | date         | NO   |     | NULL    |                |
 +-------------+--------------+------+-----+---------+----------------+
 8 rows in set (0.01 sec)
+
+# UC9_Extended_Employee_Payroll_to_add_Basicpay, deductions, Taxable Pay, Income, Tax and Net Pay
+
+mysql> ALTER TABLE employee_payroll rename column salary to basic_pay;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE employee_payroll add deductions double NOT NULL after basic_pay;
+Query OK, 0 rows affected (0.09 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE employee_payroll add taxable_pay double NOT NULL after deductions;
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE employee_payroll add tax double NOT NULL after taxable_pay;
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE employee_payroll add net_pay double NOT NULL after tax;
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * from employee_payroll;
++----+---------+-------------+---------+------------+--------+-----------+------------+-------------+-----+---------+------------+
+| id | name    | phonenumber | address | department | gender | basic_pay | deductions | taxable_pay | tax | net_pay | start      |
++----+---------+-------------+---------+------------+--------+-----------+------------+-------------+-----+---------+------------+
+|  1 | Mark    | NULL        | NULL    |            | M      |   1000000 |          0 |           0 |   0 |       0 | 2020-05-18 |
+|  2 | Jeff    | NULL        | NULL    |            | M      |   2000000 |          0 |           0 |   0 |       0 | 2020-05-25 |
+|  3 | Bill    | NULL        | NULL    |            | M      |   6000000 |          0 |           0 |   0 |       0 | 2020-05-29 |
+|  4 | Melissa | NULL        | NULL    |            | F      |   8000000 |          0 |           0 |   0 |       0 | 2020-05-09 |
+|  5 | Sunita  | NULL        | NULL    |            | F      |   1000000 |          0 |           0 |   0 |       0 | 2020-05-23 |
++----+---------+-------------+---------+------------+--------+-----------+------------+-------------+-----+---------+------------+
+5 rows in set (0.00 sec)
